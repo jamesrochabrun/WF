@@ -65,6 +65,7 @@ extension UILabel {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.textColor = UIColor.hexStringToUIColor(textColor)
         self.adjustsFontSizeToFitWidth = true
+        self.text = text
     }
 }
 
@@ -78,7 +79,6 @@ extension UITextView {
         self.textColor = UIColor.hexStringToUIColor(textColor)
         self.isUserInteractionEnabled = false
         self.contentInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
-        
     }
     
     

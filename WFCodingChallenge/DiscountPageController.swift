@@ -14,7 +14,7 @@ class DiscountPageController: UIPageViewController {
     // MARK: - Global Private constants and Variables.
     private let pageDataSource = PageControllerDataSource()
     
-    // MARK: - UI
+    // MARK: - UI Components
     lazy var serviceSelectorView: ServiceSelectorView = {
         let view = ServiceSelectorView()
         view.delegate = self

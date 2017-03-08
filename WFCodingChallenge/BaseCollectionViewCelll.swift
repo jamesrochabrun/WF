@@ -9,10 +9,13 @@
 import Foundation
 import UIKit
 
+
+//MARK: - This is a convenient base class of UICollectionViewCell
 class BaseCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .clear
         setupViews()
     }
     

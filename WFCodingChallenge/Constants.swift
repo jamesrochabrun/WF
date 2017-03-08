@@ -21,13 +21,20 @@ struct Constants {
         static let actionButtonCornerRadius: CGFloat = 4.0
         static let containerCornerRadius: CGFloat = 10.0
    
-        static let scheduleHeaderHeight = (UIScreen.main.bounds.height - 64) * 0.37
-        static let calendarCellHeight = (UIScreen.main.bounds.height - 64) * 0.2
+        static let scheduleHeaderHeight = (UIScreen.main.bounds.height - 64) * 0.35
+        static let calendarCellHeight = (UIScreen.main.bounds.height - 64) * 0.22
         static let timeCellHeight = (UIScreen.main.bounds.height - 64) * 0.31
         static let footerHeight = (UIScreen.main.bounds.height - 64) * 0.1
         
         static let scheduleViewPadding: CGFloat = 10.0
         static let scheduleViewPaddingSmall: CGFloat = 5.0
+        static let scheduleViewPaddingBig: CGFloat = 15.0
+        
+        static let calendarLabelHeight: CGFloat = 15
+        static let calendarLabelWidth: CGFloat = 120
+        
+        static let timeCellWidth: CGFloat = 100.0
+        
     }
     
     struct  Font {
@@ -41,11 +48,13 @@ struct Constants {
         static let lightBlue = "#61b3eb"
         static let dotGray = "d0d7e0"
         static let dotWhite = "ffffff"
-        static let actionButtonColor = "026BC5"
+        static let doActionColor = "026BC5"
         static let textColorDark = "08102b"
         static let textcolorDark1 = "#44464A"
         static let textColorGray = "#7d7d7d"
+        static let textColorGray1 = "#53585f"
         static let white = "#ffffff"
+        static let backColor = "#f5f5f5"
 
     }
     

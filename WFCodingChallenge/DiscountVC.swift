@@ -41,21 +41,22 @@ class DiscountVC: UIViewController {
     
     lazy var reserveButton: UIButton = {
         let button = UIButton()
-        button.with(title: "RESERVE", target: self, selector: #selector(test), cornerRadius: Constants.UI.actionButtonCornerRadius, font: Constants.Font.medium, fontSize: Constants.UI.actionButtonFontSize, color: Constants.Color.actionButtonColor, titleColor: Constants.Color.white)
+        button.with(title: "RESERVE", target: self, selector: #selector(test), cornerRadius: Constants.UI.actionButtonCornerRadius, font: Constants.Font.medium, fontSize: Constants.UI.actionButtonFontSize, color: Constants.Color.doActionColor, titleColor: Constants.Color.white)
         return button
     }()
   
-    
+    //MARK: - App lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUPSubViews()
     }
     
+    //MARK: - set Up UI
     private func setUPSubViews() {
         
         view.addSubview(imageView)
         imageView.topAnchor.constraint(equalTo: view.topAnchor,
-                                       constant: 64).isActive = true
+                                       constant: Constants.UI.statusBarHeight + Constants.UI.navigationControllerHeight).isActive = true
         imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         imageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         imageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true

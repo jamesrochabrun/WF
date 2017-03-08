@@ -11,22 +11,25 @@ import UIKit
 
 class ScheduleVC: UICollectionViewController {
     
+    //MARK: - Constants and Variables
     var service: Service?
     private let headerID = "headerID"
     private let calendarCellID = "calendarID"
     private let timeCellID = "timeCellID"
     
+    //MARK: - APP Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
         collectionView?.register(ScheduleHeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
         collectionView?.register(CalendarCell.self, forCellWithReuseIdentifier: calendarCellID)
         collectionView?.register(TimeCell.self, forCellWithReuseIdentifier: timeCellID)
+        collectionView?.backgroundColor = UIColor.hexStringToUIColor(Constants.Color.backColor)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.item == 1 {
+        if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: calendarCellID, for: indexPath) as! CalendarCell
             return cell
         }
@@ -61,9 +64,7 @@ extension ScheduleVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: Constants.UI.scheduleHeaderHeight)
-    }
-    
-    
+    }    
 }
 
 

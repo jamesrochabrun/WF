@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 
+//MARK: - This is a convenient base class of UITableViewCell
+
 class BaseTableViewCell: UITableViewCell {
-    
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

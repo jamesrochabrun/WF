@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+//MARK: - This is a convenient base class of UIView
+
 class BaseView: UIView {
     
     override init(frame: CGRect) {

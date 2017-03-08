@@ -90,8 +90,7 @@
 			children = (
 				7B4DA37C1E6E0632008CFF8A /* CoreDataStack.swift */,
 				7B4DA3641E6E029A008CFF8A /* AppDelegate.swift */,
-				7B4DA3801E6E10E8008CFF8A /* Extensions.swift */,
-				7B4DA37E1E6E1052008CFF8A /* Constants.swift */,
+				7B7035021E70996C001861B2 /* Helpers */,
 				7B4DA37B1E6E05CA008CFF8A /* Controller */,
 				7B4DA37A1E6E05C3008CFF8A /* View */,
 				7B4DA3791E6E05BA008CFF8A /* Model */,
@@ -115,7 +114,7 @@
 		7B4DA37A1E6E05C3008CFF8A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7BD512DA1E6F423A009DAEF8 /* BaseView.swift */,
+				7B7035011E709872001861B2 /* BaseView */,
 				7BD512DC1E6F431F009DAEF8 /* ServiceSelectorView.swift */,
 				7BD512E41E6F5E91009DAEF8 /* Cells */,
 			);
@@ -133,11 +132,45 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		7BD512E41E6F5E91009DAEF8 /* Cells */ = {
+		7B7035001E709795001861B2 /* BaseCells */ = {
 			isa = PBXGroup;
 			children = (
 				7BD512DE1E6F5622009DAEF8 /* BaseTableViewCell.swift */,
+				7BD512EC1E6F86B5009DAEF8 /* BaseCollectionViewCelll.swift */,
+			);
+			name = BaseCells;
+			sourceTree = "<group>";
+		};
+		7B7035011E709872001861B2 /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				7BD512DA1E6F423A009DAEF8 /* BaseView.swift */,
+			);
+			name = BaseView;
+			sourceTree = "<group>";
+		};
+		7B7035021E70996C001861B2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7B4DA37E1E6E1052008CFF8A /* Constants.swift */,
+				7B4DA3801E6E10E8008CFF8A /* Extensions.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		7B7035031E7099B2001861B2 /* ReservationsVCCells */ = {
+			isa = PBXGroup;
+			children = (
 				7BD512E01E6F5705009DAEF8 /* ServiceSelectorCell.swift */,
+			);
+			name = ReservationsVCCells;
+			sourceTree = "<group>";
+		};
+		7BD512E41E6F5E91009DAEF8 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7B7035001E709795001861B2 /* BaseCells */,
+				7B7035031E7099B2001861B2 /* ReservationsVCCells */,
 				7BD512EB1E6F852D009DAEF8 /* SceduleCVCells */,
 			);
 			name = Cells;
@@ -155,7 +188,6 @@
 		7BD512EB1E6F852D009DAEF8 /* SceduleCVCells */ = {
 			isa = PBXGroup;
 			children = (
-				7BD512EC1E6F86B5009DAEF8 /* BaseCollectionViewCelll.swift */,
 				7BD512EE1E6F870A009DAEF8 /* ScheduleHeaderCell.swift */,
 				7BD512F01E6F8940009DAEF8 /* CalendarCell.swift */,
 				7BD512F21E6F901A009DAEF8 /* TimeCell.swift */,

@@ -11,6 +11,8 @@ import UIKit
 
 class ServiceSelectorCell: BaseTableViewCell {
     
+    
+    //MARK: - UI Components
     let serviceLabel: UILabel = {
         let label = UILabel()
         label.with(text: "", font: Constants.Font.regular, fontSize: 15, textColor: Constants.Color.textColorDark)
@@ -24,6 +26,7 @@ class ServiceSelectorCell: BaseTableViewCell {
         return v
     }()
     
+    //MARK: - Set Up UI
     override func setupViews() {
         self.accessoryType = .disclosureIndicator
         addSubview(serviceLabel)
@@ -38,6 +41,7 @@ class ServiceSelectorCell: BaseTableViewCell {
         dividerLine.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
     }
     
+    //MARK: - Set Up Data for cell
     func setUpCellWith(service: Service) {
         serviceLabel.text = service.name
     }

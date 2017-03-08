@@ -45,7 +45,7 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.with(text: "", font: Constants.Font.regular, fontSize: 13, textColor: Constants.Color.actionButtonColor)
+        label.with(text: "", font: Constants.Font.regular, fontSize: 13, textColor: Constants.Color.doActionColor)
         return label
     }()
     
@@ -79,7 +79,6 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
 
     //MARK: - UI SetUP
     override func setupViews() {
-        backgroundColor = .red
         
         addSubview(scheduleInfoView)
         scheduleInfoView.leftAnchor.constraint(equalTo: leftAnchor, constant: Constants.UI.scheduleViewPadding).isActive = true

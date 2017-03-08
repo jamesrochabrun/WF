@@ -9,16 +9,21 @@
 import Foundation
 import UIKit
 
+//MARK: - Protocol for navigation purposes
 protocol ServiceSelectorViewDelegate: class {
     func goToSchedule(service: Service)
 }
 
 class ServiceSelectorView: BaseView {
     
+    //MARK: - private constants
     fileprivate let cellID = "cellID"
     fileprivate let serviceDataSource = ServiceDataSource()
+    
+    //MARK: - delegate
     weak var delegate: ServiceSelectorViewDelegate?
     
+    //MARK: - UI Components
     lazy var tableView: UITableView = {
         let tv = UITableView(frame: CGRect.zero, style: .plain)
         tv.dataSource = self.serviceDataSource
@@ -28,6 +33,7 @@ class ServiceSelectorView: BaseView {
         return tv
     }()
     
+    //MARK: - UI Set Up of  ServiceSelectorView
     override func setUpViews() {
         backgroundColor = .white
         layer.cornerRadius = Constants.UI.containerCornerRadius
@@ -43,8 +49,10 @@ class ServiceSelectorView: BaseView {
     }
 }
 
+//MARK: - Delegate methods of tableView
 extension ServiceSelectorView: UITableViewDelegate {
     
+    //open just the HOT stone massage
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let service = serviceDataSource.getServices()[indexPath.row]
