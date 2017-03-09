@@ -66,12 +66,12 @@ extension ScheduleVC: UICollectionViewDelegateFlowLayout {
 
 //MARK: ScheduleVCDataSourceDelegate method
 extension ScheduleVC: ScheduleVCDataSourceDelegate {
-    
     func showPartySizePickerInVC() {
         partyPickerView.alpha = 1
     }
-    
 }
+
+
 
 
 

@@ -9,11 +9,18 @@
 import Foundation
 import UIKit
 
+protocol CalendarCellDelegate: class {
+    func dateSelectedWith(_ dateNumber: String, dateDay: String)
+}
+
 class CalendarCell: BaseCollectionViewCell {
     
     //MARK: - private constant
     fileprivate let cellID = "cellID"
     private let calendarDataSource = CalendarDataSource()
+    
+    //MARK: - Delegate
+    weak var delegate: CalendarCellDelegate?
     
     //MARK: - UI Component
     lazy var dateCollectionView: UICollectionView = {
@@ -82,6 +89,9 @@ extension CalendarCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLa
     
         guard let cell = collectionView.cellForItem(at: indexPath) as? DateCell else {
             return
+        }
+        if let numberDate = cell.numberLabel.text, let day = cell.dayLabel.text {
+            delegate?.dateSelectedWith(numberDate, dateDay: day)
         }
         UIView.animate(withDuration: 0.3, animations: {
             cell.checkImageView.alpha = 0.75

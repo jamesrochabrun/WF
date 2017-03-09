@@ -18,7 +18,6 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
     //MARK: delegate Variable
     weak var delegate: ScheduleHeaderCellDelegate?
     
-    
     //MARK: - UI Components
     let scheduleInfoView: UIView = {
         let v = UIView()
@@ -145,13 +144,6 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
         partybutton.centerYAnchor.constraint(equalTo: partyLabel.centerYAnchor).isActive = true
     }
     
-    func changePartySize(_ notification: NSNotification) {
-        
-        
-        print(notification)
-    }
-
-    
     //MARK: - SetUpCell Data
     func setUpHeaderWith(service: Service) {
         
@@ -163,10 +155,24 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
         partyLabel.text = "PARTY SIZE"
     }
     
+    //MARK: - NSnotification updates the partylabel button
+    func changePartySize(_ notification: NSNotification) {
+        if let partyString = notification.object as? String {
+            partybutton.setTitle(partyString, for: .normal)
+        }
+    }
+    
+    //MARK: helper selector to perform delegate
     func performDelegate() {
         delegate?.showPartySizePicker()
     }
+    
+    //MARK: Lifecycle dealloc to remove the observer?
+
 }
+
+
+
 
 
 
