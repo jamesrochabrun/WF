@@ -169,6 +169,7 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
     
     //MARK: Lifecycle dealloc to remove the observer?
 
+
 }
 
 

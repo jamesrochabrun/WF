@@ -13,12 +13,13 @@ protocol ReservationCellDelegate: class {
     func displayAlertToCancel(reservation: Reservation?)
 }
 
-
 class ReserVationCell: BaseTableViewCell {
     
+    //MARK: Constants and Variables
     weak var delegate: ReservationCellDelegate?
     private var reservation: Reservation?
     
+    //MARK: UI Components
     let containerView: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -93,7 +94,7 @@ class ReserVationCell: BaseTableViewCell {
         return b
     }()
     
-    
+    //MARK: SETUP VIEWS
     override func setupViews() {
         
         backgroundColor = .clear
@@ -157,7 +158,7 @@ class ReserVationCell: BaseTableViewCell {
         cancelButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.42).isActive = true
         cancelButton.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.18).isActive = true
         cancelButton.leftAnchor.constraint(equalTo: containerView.centerXAnchor, constant: Constants.UI.scheduleViewPaddingSmall).isActive = true
-        cancelButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.UI.scheduleViewPadding).isActive = true
+        cancelButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.UI.scheduleViewPadding + 2).isActive = true
         
         rescheduleButton.widthAnchor.constraint(equalTo: cancelButton.widthAnchor).isActive = true
         rescheduleButton.heightAnchor.constraint(equalTo: cancelButton.heightAnchor).isActive = true
@@ -166,6 +167,7 @@ class ReserVationCell: BaseTableViewCell {
         
     }
     
+    //MARK: setup data
     func setReservationCellWith(reservation: Reservation) {
         
         self.reservation = reservation
@@ -179,12 +181,12 @@ class ReserVationCell: BaseTableViewCell {
         if let day = reservation.weekDay, let month = reservation.month, let dayNumber = reservation.day, let year = reservation.year {
             dateLabel.text = day + ", " + month + " " + dayNumber + ", " + year
         }
-        
     }
     
     func reschedule() {
     }
     
+    //Delete reservation form CoreData
     func cancelReserve() {
         delegate?.displayAlertToCancel(reservation: self.reservation)
     }

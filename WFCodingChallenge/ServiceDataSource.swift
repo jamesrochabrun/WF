@@ -42,6 +42,15 @@ class ServiceDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! ServiceSelectorCell
         let service = getServices()[indexPath.row]
         cell.setUpCellWith(service: service)
+        
+        switch indexPath.row {
+        case 0,1,3,4:
+            cell.isUserInteractionEnabled = false
+        case 2:
+            cell.isUserInteractionEnabled = true
+        default:
+            break
+        }
         return cell
     }
     

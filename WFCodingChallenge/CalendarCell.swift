@@ -9,11 +9,18 @@
 import Foundation
 import UIKit
 
+protocol CalendarCellDelegate: class {
+    func showCalendar()
+}
+
 class CalendarCell: BaseCollectionViewCell {
     
     //MARK: - private constant
     fileprivate let cellID = "cellID"
     private let calendarDataSource = CalendarDataSource()
+    
+    //MARK: Delegate
+    weak var delegate: CalendarCellDelegate?
     
     //MARK: - UI Component
     lazy var dateCollectionView: UICollectionView = {
@@ -31,17 +38,16 @@ class CalendarCell: BaseCollectionViewCell {
     
     let monthLabel: UILabel  = {
         let label = UILabel()
-        label.with(text: "APRIL", font: Constants.Font.medium, fontSize: 13, textColor: Constants.Color.textcolorDark1)
+        label.with(text: Date().getMonth().uppercased(), font: Constants.Font.medium, fontSize: 13, textColor: Constants.Color.textcolorDark1)
         label.adjustsFontSizeToFitWidth = false
         return label
     }()
     
-    let viewCalendarLabel: UILabel = {
-        let label = UILabel()
-        label.with(text: "View Calendar", font:  Constants.Font.medium, fontSize: 12, textColor: Constants.Color.doActionColor)
-        return label
+    lazy var viewCalendarLabel: UIButton = {
+        let b = UIButton()
+        b.with(title: "View Calendar", target: self, selector: #selector(showCalendar), cornerRadius: 0, font: Constants.Font.medium, fontSize: 12, color: Constants.Color.backColor, titleColor: Constants.Color.doActionColor)
+        return b
     }()
-    
     
     //MARK: - Set Up UI
     override func setupViews() {
@@ -68,8 +74,14 @@ class CalendarCell: BaseCollectionViewCell {
     }
 }
 
+    //MARK: calendar cell delagte method
+extension CalendarCell {
+    func showCalendar() {
+        delegate?.showCalendar()
+    }
+}
 
-//MARK: - CalendarCell delegate and flowLayout protocols
+    //MARK: - Collection View delegate and flowLayout protocols
 extension CalendarCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

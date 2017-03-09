@@ -76,7 +76,7 @@ class DiscountVC: UIViewController {
                                            constant: view.bounds.height/3.3).isActive = true
     }
     
-    
+    //MARK: Navigation
     func goToSchedule() {
         
         if pageControl.currentPage != 1 { return }

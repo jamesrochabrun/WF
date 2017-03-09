@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+//Main class
 class Service: NSObject {
     
     let name: String

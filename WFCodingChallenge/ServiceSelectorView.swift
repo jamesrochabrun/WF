@@ -57,15 +57,8 @@ extension ServiceSelectorView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let service = serviceDataSource.getServices()[indexPath.row]
-        print(service.name)
-        switch indexPath.row {
-        case 0,1,3,4:
-            return
-        case 2:
-            delegate?.goToSchedule(service:service)
-        default:
-            break
-        }
+        delegate?.goToSchedule(service:service)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

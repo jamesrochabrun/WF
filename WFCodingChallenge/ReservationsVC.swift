@@ -100,6 +100,7 @@ class ReservationsVC: UITableViewController, ReservationCellDelegate {
     }
 }
 
+    //MARK: CoreData
 @available(iOS 10.0, *)
 extension ReservationsVC: NSFetchedResultsControllerDelegate {
     

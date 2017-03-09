@@ -25,6 +25,8 @@ struct Constants {
         static let pageControlWidth: CGFloat = 34.0
         static let selectorViewHeight: CGFloat = 250.0
         static let bottomPadding: CGFloat = 20.0
+        static let pickerHeight: CGFloat = 200
+        static let pickerBarHeight: CGFloat = 44
         
    //MARK: Cells layout
         static let scheduleHeaderHeight = (UIScreen.main.bounds.height - 64) * 0.35

@@ -11,7 +11,7 @@ import UIKit
 
 class CalendarDataSource: NSObject, UICollectionViewDataSource {
     
-    //MARK: - 
+    //MARK: - Constants and Var
     private let cellID = "cellID"
     let dates: [Date] = Date().getAllDaysInMonth()
     private let dateFormatter = DateFormatter()
@@ -21,7 +21,7 @@ class CalendarDataSource: NSObject, UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! DateCell
         dateFormatter.dateFormat = "EEE"
-        cell.dayLabel.text = dateFormatter.string(from: dates[indexPath.item])
+        cell.dayLabel.text = dateFormatter.string(from: dates[indexPath.item]).uppercased()
         cell.numberLabel.text = String(indexPath.row + 1)
         cell.checkImageView.alpha = cell.isSelected ? 0.75 : 0
         return cell

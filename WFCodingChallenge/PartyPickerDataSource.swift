@@ -21,7 +21,5 @@ class PartyPickerDataSource: NSObject, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView,
                     numberOfRowsInComponent component: Int) -> Int {
         return pickerDataSource.getOptions().count
-    }
-    
-    
+    }    
 }

@@ -134,19 +134,19 @@ extension String {
     
     func convertInFullDayString() -> String {
         switch self {
-        case "Mon":
+        case "MON":
             return "Monday"
-        case "Tue":
+        case "TUE":
             return "Tuesday"
-        case "Wed":
+        case "WED":
             return "Wednesday"
-        case "Thu":
+        case "THU":
             return "Thursday"
-        case "Fri":
+        case "FRI":
             return "Friday"
-        case "Sat":
+        case "SAT":
             return "Saturday"
-        case "Sun":
+        case "SUN":
             return "Sunday"
         default:
             return self

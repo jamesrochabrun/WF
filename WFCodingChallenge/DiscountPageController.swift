@@ -49,6 +49,7 @@ class DiscountPageController: UIPageViewController {
     }
 }
 
+    //MARK: ServiceSelectorViewDelegate methods
 extension DiscountPageController: ServiceSelectorViewDelegate {
     
     func goToSchedule(service: Service) {

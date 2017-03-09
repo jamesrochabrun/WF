@@ -25,12 +25,19 @@ class ScheduleVC: UICollectionViewController {
     var weekDayString: String?
     var partySize: String?
     var hourString: String?
+    var partyPickerViewTopAnchor: NSLayoutConstraint?
+
 
     //MARK: - UI Components
     let partyPickerView: ViewPartyPicker = {
         let vpv = ViewPartyPicker()
-        vpv.alpha = 0
         return vpv
+    }()
+    
+    let calendarView: CalendarView = {
+        let v = CalendarView()
+        v.alpha = 0
+        return v
     }()
     
     lazy var reservationButton: UIButton = {
@@ -66,8 +73,7 @@ class ScheduleVC: UICollectionViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.pickerNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.buttonEnabledNotification, object: nil)
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK: - Set Up UI
@@ -81,9 +87,16 @@ class ScheduleVC: UICollectionViewController {
         
         view.addSubview(partyPickerView)
         partyPickerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        partyPickerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        partyPickerView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        partyPickerViewTopAnchor = partyPickerView.topAnchor.constraint(equalTo: view.bottomAnchor)
+        partyPickerViewTopAnchor?.isActive = true
+        partyPickerView.heightAnchor.constraint(equalToConstant: Constants.UI.pickerHeight + Constants.UI.pickerBarHeight).isActive = true
         partyPickerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        
+        view.addSubview(calendarView)
+        calendarView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        calendarView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        calendarView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        calendarView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
     
     //MARK: - Handle reservation Button
@@ -107,10 +120,10 @@ class ScheduleVC: UICollectionViewController {
     }
 }
 
+//MARK: - CoreData
 @available(iOS 10.0, *)
 extension ScheduleVC {
     
-    //MARK: - CoreData
     func constructAndSaveInCoreData() {
         
         let context = CoreDataStack.sharedInstance.context
@@ -138,12 +151,13 @@ extension ScheduleVC {
 }
 
     //MARK: - ScheduleVC DataSource
-extension ScheduleVC {
+extension ScheduleVC: CalendarCellDelegate {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: calendarCellID, for: indexPath) as! CalendarCell
+            cell.delegate = self
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: timeCellID, for: indexPath) as! TimeCell
@@ -162,6 +176,13 @@ extension ScheduleVC {
             scheduleHeaderView.setUpHeaderWith(service: service)
         }
         return scheduleHeaderView
+    }
+    
+    //MARK: - CalendarDelegate method
+    func showCalendar() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.calendarView.alpha = 1
+        })
     }
     
 }
@@ -184,13 +205,23 @@ extension ScheduleVC: UICollectionViewDelegateFlowLayout {
     //MARK: - ScheduleHeaderCellDelegate methods
 extension ScheduleVC: ScheduleHeaderCellDelegate {
     func showPartySizePicker() {
-        partyPickerView.alpha = 1
+        
+        partyPickerViewTopAnchor?.constant = -(Constants.UI.pickerHeight + Constants.UI.pickerBarHeight)
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
 }
 
 extension ScheduleVC {
     //MARK: - NSnotificationupdates Party Size
     func changePartySize(_ notification: NSNotification) {
+        
+        partyPickerViewTopAnchor?.constant = view.frame.size.height
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.layoutIfNeeded()
+        })
+        
         if let partyString = notification.object as? String {
             partySize = partyString
         }
