@@ -81,9 +81,45 @@ extension UITextView {
         self.contentInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
     }
     
-    
 }
 
+
+//MARK: - Date Extensions
+
+extension Date {
+    
+    func startOfMonth() -> Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
+    }
+    
+    func endOfMonth() -> Date {
+        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
+    }
+    
+    func getAllDaysInMonth() -> [Date] {
+        
+        let calendar = Calendar.current
+        let normalizeStartDate = self.startOfMonth()
+        let normalizedEndDate = self.endOfMonth()
+        var dates = [normalizeStartDate]
+        var date = normalizeStartDate
+        repeat {
+            date = calendar.date(byAdding: .day,
+                                 value: 1,
+                                 to: date)!
+            
+            dates.append(date as Date)
+            
+        } while !calendar.isDate(date as Date,
+                                 inSameDayAs: normalizedEndDate)
+        return dates
+    }
+}
+
+//MARK: notification names
+extension Notification.Name {
+    static let pickerNotification = Notification.Name("picker")
+}
 
 
 

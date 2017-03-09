@@ -17,6 +17,13 @@
 		7B4DA3811E6E10E8008CFF8A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4DA3801E6E10E8008CFF8A /* Extensions.swift */; };
 		7B4DA3851E6E1997008CFF8A /* DiscountPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4DA3841E6E1997008CFF8A /* DiscountPageController.swift */; };
 		7B4DA3891E6E2391008CFF8A /* DiscountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4DA3881E6E2391008CFF8A /* DiscountVC.swift */; };
+		7B7035071E70A094001861B2 /* CalendarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7035061E70A094001861B2 /* CalendarDataSource.swift */; };
+		7B7035091E70AD1B001861B2 /* BusinessHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7035081E70AD1B001861B2 /* BusinessHours.swift */; };
+		7B70350B1E70AF09001861B2 /* TimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B70350A1E70AF09001861B2 /* TimeDataSource.swift */; };
+		7B70350D1E70CE7D001861B2 /* PartySizeOptionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B70350C1E70CE7D001861B2 /* PartySizeOptionsModel.swift */; };
+		7B70350F1E70CF31001861B2 /* PartyPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B70350E1E70CF31001861B2 /* PartyPickerDataSource.swift */; };
+		7B7035121E70D2E9001861B2 /* ViewPartyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7035111E70D2E9001861B2 /* ViewPartyPicker.swift */; };
+		7B7035141E70D6CE001861B2 /* ScheduleVCDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7035131E70D6CE001861B2 /* ScheduleVCDataSource.swift */; };
 		7BD512D91E6F1DB6009DAEF8 /* PageControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD512D81E6F1DB6009DAEF8 /* PageControllerDataSource.swift */; };
 		7BD512DB1E6F423A009DAEF8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD512DA1E6F423A009DAEF8 /* BaseView.swift */; };
 		7BD512DD1E6F431F009DAEF8 /* ServiceSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD512DC1E6F431F009DAEF8 /* ServiceSelectorView.swift */; };
@@ -44,6 +51,13 @@
 		7B4DA3801E6E10E8008CFF8A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7B4DA3841E6E1997008CFF8A /* DiscountPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountPageController.swift; sourceTree = "<group>"; };
 		7B4DA3881E6E2391008CFF8A /* DiscountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountVC.swift; sourceTree = "<group>"; };
+		7B7035061E70A094001861B2 /* CalendarDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDataSource.swift; sourceTree = "<group>"; };
+		7B7035081E70AD1B001861B2 /* BusinessHours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessHours.swift; sourceTree = "<group>"; };
+		7B70350A1E70AF09001861B2 /* TimeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeDataSource.swift; sourceTree = "<group>"; };
+		7B70350C1E70CE7D001861B2 /* PartySizeOptionsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartySizeOptionsModel.swift; sourceTree = "<group>"; };
+		7B70350E1E70CF31001861B2 /* PartyPickerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyPickerDataSource.swift; sourceTree = "<group>"; };
+		7B7035111E70D2E9001861B2 /* ViewPartyPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPartyPicker.swift; sourceTree = "<group>"; };
+		7B7035131E70D6CE001861B2 /* ScheduleVCDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVCDataSource.swift; sourceTree = "<group>"; };
 		7BD512D81E6F1DB6009DAEF8 /* PageControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageControllerDataSource.swift; sourceTree = "<group>"; };
 		7BD512DA1E6F423A009DAEF8 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7BD512DC1E6F431F009DAEF8 /* ServiceSelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceSelectorView.swift; sourceTree = "<group>"; };
@@ -91,9 +105,10 @@
 				7B4DA37C1E6E0632008CFF8A /* CoreDataStack.swift */,
 				7B4DA3641E6E029A008CFF8A /* AppDelegate.swift */,
 				7B7035021E70996C001861B2 /* Helpers */,
-				7B4DA37B1E6E05CA008CFF8A /* Controller */,
-				7B4DA37A1E6E05C3008CFF8A /* View */,
 				7B4DA3791E6E05BA008CFF8A /* Model */,
+				7B4DA37A1E6E05C3008CFF8A /* View */,
+				7B4DA37B1E6E05CA008CFF8A /* Controller */,
+				7BD512E41E6F5E91009DAEF8 /* Cells */,
 				7B4DA36E1E6E029A008CFF8A /* Assets.xcassets */,
 				7B4DA3701E6E029A008CFF8A /* LaunchScreen.storyboard */,
 				7B4DA3731E6E029A008CFF8A /* Info.plist */,
@@ -106,6 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				7BD512E21E6F5AE0009DAEF8 /* Service.swift */,
+				7B7035081E70AD1B001861B2 /* BusinessHours.swift */,
+				7B70350C1E70CE7D001861B2 /* PartySizeOptionsModel.swift */,
 				7BD512E71E6F731F009DAEF8 /* DataSources */,
 			);
 			name = Model;
@@ -114,9 +131,7 @@
 		7B4DA37A1E6E05C3008CFF8A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7B7035011E709872001861B2 /* BaseView */,
-				7BD512DC1E6F431F009DAEF8 /* ServiceSelectorView.swift */,
-				7BD512E41E6F5E91009DAEF8 /* Cells */,
+				7B7035041E709FAF001861B2 /* CustomViews */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -166,6 +181,32 @@
 			name = ReservationsVCCells;
 			sourceTree = "<group>";
 		};
+		7B7035041E709FAF001861B2 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				7B7035011E709872001861B2 /* BaseView */,
+				7B7035101E70D2C1001861B2 /* ScheduleVCViews */,
+				7B7035051E709FC2001861B2 /* ReservationsVCViews */,
+			);
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		7B7035051E709FC2001861B2 /* ReservationsVCViews */ = {
+			isa = PBXGroup;
+			children = (
+				7BD512DC1E6F431F009DAEF8 /* ServiceSelectorView.swift */,
+			);
+			name = ReservationsVCViews;
+			sourceTree = "<group>";
+		};
+		7B7035101E70D2C1001861B2 /* ScheduleVCViews */ = {
+			isa = PBXGroup;
+			children = (
+				7B7035111E70D2E9001861B2 /* ViewPartyPicker.swift */,
+			);
+			name = ScheduleVCViews;
+			sourceTree = "<group>";
+		};
 		7BD512E41E6F5E91009DAEF8 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +222,10 @@
 			children = (
 				7BD512D81E6F1DB6009DAEF8 /* PageControllerDataSource.swift */,
 				7BD512E51E6F5F08009DAEF8 /* ServiceDataSource.swift */,
+				7B7035061E70A094001861B2 /* CalendarDataSource.swift */,
+				7B70350A1E70AF09001861B2 /* TimeDataSource.swift */,
+				7B70350E1E70CF31001861B2 /* PartyPickerDataSource.swift */,
+				7B7035131E70D6CE001861B2 /* ScheduleVCDataSource.swift */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -280,10 +325,17 @@
 				7BD512DB1E6F423A009DAEF8 /* BaseView.swift in Sources */,
 				7BD512F11E6F8940009DAEF8 /* CalendarCell.swift in Sources */,
 				7BD512D91E6F1DB6009DAEF8 /* PageControllerDataSource.swift in Sources */,
+				7B7035091E70AD1B001861B2 /* BusinessHours.swift in Sources */,
+				7B7035141E70D6CE001861B2 /* ScheduleVCDataSource.swift in Sources */,
+				7B70350D1E70CE7D001861B2 /* PartySizeOptionsModel.swift in Sources */,
 				7B4DA3651E6E029A008CFF8A /* AppDelegate.swift in Sources */,
+				7B70350F1E70CF31001861B2 /* PartyPickerDataSource.swift in Sources */,
 				7B4DA36D1E6E029A008CFF8A /* WFCodingChallenge.xcdatamodeld in Sources */,
 				7BD512DD1E6F431F009DAEF8 /* ServiceSelectorView.swift in Sources */,
 				7B4DA3851E6E1997008CFF8A /* DiscountPageController.swift in Sources */,
+				7B70350B1E70AF09001861B2 /* TimeDataSource.swift in Sources */,
+				7B7035121E70D2E9001861B2 /* ViewPartyPicker.swift in Sources */,
+				7B7035071E70A094001861B2 /* CalendarDataSource.swift in Sources */,
 				7BD512DF1E6F5622009DAEF8 /* BaseTableViewCell.swift in Sources */,
 				7BD512E61E6F5F08009DAEF8 /* ServiceDataSource.swift in Sources */,
 				7B4DA37D1E6E0632008CFF8A /* CoreDataStack.swift in Sources */,

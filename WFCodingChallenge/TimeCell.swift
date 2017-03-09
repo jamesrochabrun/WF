@@ -14,17 +14,17 @@ class TimeCell: CalendarCell {
     
     //MARK: - private constants
     private let cellID = "cellID"
-    
+    private let timeDataSource = TimeDataSource()
     
     //MARK: - set Up UI for TimeCell
     override func setupViews() {
         
         addSubview(dateCollectionView)
         addSubview(monthLabel)
-    
         viewCalendarLabel.isHidden = true
         monthLabel.text = "AVAILABLE TIMES"
         dateCollectionView.register(HourCell.self, forCellWithReuseIdentifier: cellID)
+        dateCollectionView.dataSource = timeDataSource
         
         //changing the mainMultiplier will resize dinamycally all the content of the cell, suggested range between 0.7 and 0.8 to satisfy monthLabel height
         let mainMultiplier: CGFloat = 0.75
@@ -45,13 +45,25 @@ class TimeCell: CalendarCell {
         return CGSize(width: Constants.UI.timeCellWidth, height: collectionView.frame.height / numberOfRows - 7)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! HourCell
-        return cell
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? HourCell else {
+            return
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            cell.checkImageView.alpha = 0.75
+        })
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? HourCell else {
+            return //the cell is not visible
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            cell.checkImageView.alpha = 0
+        })
     }
 }
-
-//MARK: - this cell will be used in the horizontal collectionView (dateCollectionView)
 
 class HourCell: BaseCollectionViewCell {
     
@@ -61,6 +73,16 @@ class HourCell: BaseCollectionViewCell {
         label.with(text: "12: 00PM", font: Constants.Font.regular, fontSize: 11, textColor: Constants.Color.textColorGray1)
         label.textAlignment = .center
         return label
+    }()
+    
+    let checkImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFit
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.image = #imageLiteral(resourceName: "checkmarkOutline")
+        iv.alpha = 0
+        iv.backgroundColor = UIColor.hexStringToUIColor(Constants.Color.doActionColor)
+        return iv
     }()
     
     //MARK: - Set Up UI for HourCell
@@ -73,6 +95,12 @@ class HourCell: BaseCollectionViewCell {
         hourLabel.sizeToFit()
         hourLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         hourLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        addSubview(checkImageView)
+        checkImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        checkImageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        checkImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        checkImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
     }
 }
 

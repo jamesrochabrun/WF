@@ -9,7 +9,15 @@
 import Foundation
 import UIKit
 
+protocol ScheduleHeaderCellDelegate: class {
+    func showPartySizePicker()
+}
+
 class ScheduleHeaderCell: BaseCollectionViewCell {
+    
+    //MARK: delegate Variable
+    weak var delegate: ScheduleHeaderCellDelegate?
+    
     
     //MARK: - UI Components
     let scheduleInfoView: UIView = {
@@ -71,7 +79,7 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
     
     lazy var partybutton: UIButton = {
         let button = UIButton()
-        button.with(title: "1", target: self, selector: #selector(test), cornerRadius: 2.5, font: Constants.Font.light, fontSize: 12, color: Constants.Color.white, titleColor: Constants.Color.textcolorDark1)
+        button.with(title: "1", target: self, selector: #selector(performDelegate), cornerRadius: 2.5, font: Constants.Font.light, fontSize: 12, color: Constants.Color.white, titleColor: Constants.Color.textcolorDark1)
         button.layer.borderColor = UIColor.hexStringToUIColor(Constants.Color.textcolorDark1).cgColor
         button.layer.borderWidth = 0.5
         return button
@@ -79,6 +87,8 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
 
     //MARK: - UI SetUP
     override func setupViews() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changePartySize(_:)), name: NSNotification.Name.pickerNotification, object: nil)
         
         addSubview(scheduleInfoView)
         scheduleInfoView.leftAnchor.constraint(equalTo: leftAnchor, constant: Constants.UI.scheduleViewPadding).isActive = true
@@ -135,6 +145,13 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
         partybutton.centerYAnchor.constraint(equalTo: partyLabel.centerYAnchor).isActive = true
     }
     
+    func changePartySize(_ notification: NSNotification) {
+        
+        
+        print(notification)
+    }
+
+    
     //MARK: - SetUpCell Data
     func setUpHeaderWith(service: Service) {
         
@@ -146,10 +163,9 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
         partyLabel.text = "PARTY SIZE"
     }
     
-    func test() {
-        print("tap tap")
+    func performDelegate() {
+        delegate?.showPartySizePicker()
     }
-    
 }
 
 

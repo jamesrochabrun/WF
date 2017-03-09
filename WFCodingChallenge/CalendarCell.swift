@@ -13,6 +13,7 @@ class CalendarCell: BaseCollectionViewCell {
     
     //MARK: - private constant
     fileprivate let cellID = "cellID"
+    private let calendarDataSource = CalendarDataSource()
     
     //MARK: - UI Component
     lazy var dateCollectionView: UICollectionView = {
@@ -21,7 +22,6 @@ class CalendarCell: BaseCollectionViewCell {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.dataSource = self
         cv.delegate = self
         cv.alwaysBounceHorizontal = true
         cv.contentInset = UIEdgeInsetsMake(0, Constants.UI.scheduleViewPaddingSmall, 0, Constants.UI.scheduleViewPaddingSmall)
@@ -46,6 +46,7 @@ class CalendarCell: BaseCollectionViewCell {
     //MARK: - Set Up UI
     override func setupViews() {
         addSubview(dateCollectionView)
+        dateCollectionView.dataSource = calendarDataSource
         
         //changing the mainMultiplier will resize dinamycally all the content of the cell, suggested range between 0.6 and 0.7 to satisfy monthLabel and viewCalendarLabel heights
         let mainMultiplier: CGFloat = 0.63
@@ -67,31 +68,40 @@ class CalendarCell: BaseCollectionViewCell {
     }
 }
 
-extension CalendarCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! DateCell
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
+
+//MARK: - CalendarCell delegate and flowLayout protocols
+extension CalendarCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         //0.73 keeps the aspect ratio of the design
         let size = CGSize(width: dateCollectionView.frame.height * 0.73 , height: dateCollectionView.frame.height)
         return size
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+        guard let cell = collectionView.cellForItem(at: indexPath) as? DateCell else {
+            return
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            cell.checkImageView.alpha = 0.75
+        })
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? DateCell else {
+            return //the cell is not visible
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            cell.checkImageView.alpha = 0
+        })
     }
 }
 
-
+//MARK: Cell inside the datecollectionView
 class DateCell: BaseCollectionViewCell {
-    
+        
     //MARK: - UIComponents
     let blueView: UIView = {
         let v = UIView()
@@ -112,6 +122,16 @@ class DateCell: BaseCollectionViewCell {
         label.with(text: "04", font: Constants.Font.medium, fontSize: 20, textColor: Constants.Color.textColorGray1)
         label.textAlignment = .center
         return label
+    }()
+    
+    let checkImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFit
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.image = #imageLiteral(resourceName: "checkmarkOutline")
+        iv.alpha = 0
+        iv.backgroundColor = UIColor.hexStringToUIColor(Constants.Color.doActionColor)
+        return iv
     }()
     
     //MARK: - set Up Components
@@ -142,6 +162,12 @@ class DateCell: BaseCollectionViewCell {
         dayLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.22).isActive = true
         dayLabel.bottomAnchor.constraint(equalTo: numberLabel.topAnchor).isActive = true
         dayLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        
+        addSubview(checkImageView)
+        checkImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        checkImageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        checkImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        checkImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
     }
 }
 

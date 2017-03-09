@@ -48,6 +48,4 @@ class ServiceDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return getServices().count
     }
-    
-        
 }

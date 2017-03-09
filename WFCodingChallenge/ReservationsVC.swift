@@ -19,7 +19,7 @@ class ReservationsVC: UICollectionViewController {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "open", style: .plain, target: self, action: #selector(showSpaServiceVC))
-        
+    
     }
     
     // MARK: - setUp UI

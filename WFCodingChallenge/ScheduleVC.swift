@@ -16,46 +16,43 @@ class ScheduleVC: UICollectionViewController {
     private let headerID = "headerID"
     private let calendarCellID = "calendarID"
     private let timeCellID = "timeCellID"
+    private let scheduleDataSource = ScheduleVCDataSource()
     
+    //MARK: - UI Components
+    let partyPickerView: ViewPartyPicker = {
+        let vpv = ViewPartyPicker()
+        vpv.alpha = 0
+        return vpv
+    }()
+
     //MARK: - APP Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
+        scheduleDataSource.service = service
+        scheduleDataSource.delegate = self
+        collectionView?.dataSource = scheduleDataSource
         collectionView?.register(ScheduleHeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
         collectionView?.register(CalendarCell.self, forCellWithReuseIdentifier: calendarCellID)
         collectionView?.register(TimeCell.self, forCellWithReuseIdentifier: timeCellID)
         collectionView?.backgroundColor = UIColor.hexStringToUIColor(Constants.Color.backColor)
+        setUpViews()
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if indexPath.item == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: calendarCellID, for: indexPath) as! CalendarCell
-            return cell
-        }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: timeCellID, for: indexPath) as! TimeCell
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let scheduleHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! ScheduleHeaderCell
-        if let service = self.service {
-            scheduleHeaderView.setUpHeaderWith(service: service)
-        }
-        return scheduleHeaderView
+    //MARK: - Set Up UI
+    func setUpViews() {
+        view.addSubview(partyPickerView)
+        partyPickerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        partyPickerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        partyPickerView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        partyPickerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
     }
 }
 
+//MARK: - FlowLayout delegate methods
 extension ScheduleVC: UICollectionViewDelegateFlowLayout {
     
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         if indexPath.item == 0 {
             return CGSize(width: view.frame.width, height: Constants.UI.calendarCellHeight)
         }
@@ -66,6 +63,23 @@ extension ScheduleVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: Constants.UI.scheduleHeaderHeight)
     }    
 }
+
+//MARK: ScheduleVCDataSourceDelegate method
+extension ScheduleVC: ScheduleVCDataSourceDelegate {
+    
+    func showPartySizePickerInVC() {
+        partyPickerView.alpha = 1
+    }
+    
+}
+
+
+
+
+
+
+
+
 
 
 
