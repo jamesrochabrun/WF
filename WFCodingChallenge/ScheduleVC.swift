@@ -25,11 +25,7 @@ class ScheduleVC: UICollectionViewController {
     var weekDayString: String?
     var partySize: String?
     var hourString: String?
-    
-    //periodoftime
-    //descriptio
-    //title
-    
+
     //MARK: - UI Components
     let partyPickerView: ViewPartyPicker = {
         let vpv = ViewPartyPicker()
@@ -40,7 +36,9 @@ class ScheduleVC: UICollectionViewController {
     lazy var reservationButton: UIButton = {
         let b = UIButton()
         if #available(iOS 10.0, *) {
-            b.with(title: "Reserve", target: self, selector: #selector(constructAndSaveInCoreData), cornerRadius: 0, font: Constants.Font.medium, fontSize: 16, color: Constants.Color.doActionColor, titleColor: Constants.Color.dotWhite)
+            b.with(title: "RESERVE", target: self, selector: #selector(constructAndSaveInCoreData), cornerRadius: 0, font: Constants.Font.medium, fontSize: 16, color: Constants.Color.doActionColor, titleColor: Constants.Color.dotWhite)
+            b.alpha = 0.7
+            b.isUserInteractionEnabled = false
         } else {
             // Fallback on earlier versions
         }
@@ -51,34 +49,61 @@ class ScheduleVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = Constants.GeneralSrings.scheduleVCTitle
         collectionView?.backgroundColor = .white
         collectionView?.register(ScheduleHeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
         collectionView?.register(CalendarCell.self, forCellWithReuseIdentifier: calendarCellID)
         collectionView?.register(TimeCell.self, forCellWithReuseIdentifier: timeCellID)
         collectionView?.backgroundColor = UIColor.hexStringToUIColor(Constants.Color.backColor)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.changePartySize(_:)), name: NSNotification.Name.pickerNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changePartySize(_:)),
+                                               name: NSNotification.Name.pickerNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changeButtonInteraction(_:)),
+                                               name: NSNotification.Name.buttonEnabledNotification,
+                                               object: nil)
         setUpViews()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.pickerNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.buttonEnabledNotification, object: nil)
     }
     
     //MARK: - Set Up UI
     func setUpViews() {
+        
+        view.addSubview(reservationButton)
+        reservationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        reservationButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        reservationButton.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        reservationButton.heightAnchor.constraint(equalToConstant: Constants.UI.footerHeight).isActive = true
         
         view.addSubview(partyPickerView)
         partyPickerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         partyPickerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         partyPickerView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         partyPickerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    }
+    
+    //MARK: - Handle reservation Button
+    func changeButtonInteraction(_ notification: NSNotification) {
         
-        view.addSubview(reservationButton)
-        reservationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        reservationButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        reservationButton.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        reservationButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        if let hour = notification.object as? String {
+            hourString = hour
+        }
+        if let dict = notification.object as? [String: String] {
+            let day = dict["day"]
+            weekDayString = day?.convertInFullDayString()
+            numberDayString = dict["numberDate"]
+        }
+        
+        if hourString != nil &&
+        weekDayString != nil &&
+            numberDayString != nil {
+            reservationButton.alpha = 1
+            reservationButton.isUserInteractionEnabled = true
+        }
     }
 }
 
@@ -89,24 +114,27 @@ extension ScheduleVC {
     func constructAndSaveInCoreData() {
         
         let context = CoreDataStack.sharedInstance.context
-        let reservation = NSEntityDescription.insertNewObject(forEntityName: "Reservation", into: context) as? Reservation
-        reservation?.day = numberDayString
-        reservation?.month = monthString
-        reservation?.partySize = partySize
-        reservation?.serviceName = service?.name
-        reservation?.servicePeriod = service?.period
-        reservation?.serviceDescription = service?.typeDescription
-        reservation?.time = hourString
-        reservation?.weekDay = weekDayString
-        reservation?.year = yearString
+        if let reservation = NSEntityDescription.insertNewObject(forEntityName: "Reservation", into: context) as? Reservation {
+        reservation.day = numberDayString
+        reservation.month = monthString
+        reservation.partySize = partySize ?? "1"
+        reservation.serviceName = service?.name
+        reservation.servicePeriod = service?.period
+        reservation.serviceDescription = service?.typeDescription
+        reservation.time = hourString
+        reservation.weekDay = weekDayString
+        reservation.year = yearString
+        }
         
         do {
             try context.save()
         } catch let err {
             print("ERROR SAVING: ", err)
         }
+        DispatchQueue.main.async {
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        }
     }
-    
 }
 
     //MARK: - ScheduleVC DataSource
@@ -116,11 +144,9 @@ extension ScheduleVC {
         
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: calendarCellID, for: indexPath) as! CalendarCell
-            cell.delegate = self
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: timeCellID, for: indexPath) as! TimeCell
-        cell.timedelegate = self
         return cell
     }
     
@@ -170,25 +196,6 @@ extension ScheduleVC {
         }
     }
 }
-
-    //MARK: - CalendarCellDelegate methods
-extension ScheduleVC: CalendarCellDelegate {
-    func dateSelectedWith(_ dateNumber: String, dateDay: String) {
-        print("the day \(dateNumber) \(dateDay)")
-        weekDayString = dateDay.convertInFullDayString()
-        numberDayString = dateNumber
-    }
-}
-
-    //MARK: - TimeCellDelegate methods
-extension ScheduleVC: TimeCellDelegate {
-    
-    func timeSelectedIs(_ time: String) {
-        print("\(time)")
-        hourString = time
-    }
-}
-
 
 
 

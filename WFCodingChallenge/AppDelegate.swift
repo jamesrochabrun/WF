@@ -32,9 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func setUpNavBar() {
+        UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().barTintColor = UIColor.hexStringToUIColor(Constants.Color.lightBlue)
         UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        if let font = UIFont(name: Constants.Font.regular, size: 18) {
+            UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white,
+                                                                NSFontAttributeName: font]
+        }
+        let barAppearace = UIBarButtonItem.appearance()
+        barAppearace.setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -60), for:UIBarMetrics.default)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

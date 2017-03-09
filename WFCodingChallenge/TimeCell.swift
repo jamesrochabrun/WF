@@ -10,23 +10,11 @@ import Foundation
 import  UIKit
 
 
-protocol TimeCellDelegate: class {
-    func timeSelectedIs(_ time: String)
-}
-
 class TimeCell: CalendarCell {
     
     //MARK: - private constants
     private let cellID = "cellID"
     private let timeDataSource = TimeDataSource()
-    
-    //MARK: - delegate var
-    weak var timedelegate: TimeCellDelegate?
-    override weak var delegate: CalendarCellDelegate? {
-        didSet {
-            timedelegate = delegate as? TimeCellDelegate
-        }
-    }
     
     //MARK: - set Up UI for TimeCell
     override func setupViews() {
@@ -63,7 +51,7 @@ class TimeCell: CalendarCell {
             return
         }
         if let hourString = cell.hourLabel.text {
-            timedelegate?.timeSelectedIs(hourString)
+            NotificationCenter.default.post(name: Notification.Name.buttonEnabledNotification, object: hourString)
         }
         UIView.animate(withDuration: 0.3, animations: {
             cell.checkImageView.alpha = 0.75

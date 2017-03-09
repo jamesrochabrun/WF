@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 @available(iOS 10.0, *)
-class ReservationsVC: UITableViewController {
+class ReservationsVC: UITableViewController, ReservationCellDelegate {
     
     //MARK: - private constants
     private let cellID = "cellID"
@@ -27,13 +27,15 @@ class ReservationsVC: UITableViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = Constants.GeneralSrings.reservationVCTitle
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "add"), style: .plain, target: self, action: #selector(showSpaServiceVC))
         tableView?.backgroundColor = UIColor.hexStringToUIColor(Constants.Color.backColor)
         tableView?.separatorStyle = .none
+        tableView.allowsSelection = false
         tableView.register(ReserVationCell.self, forCellReuseIdentifier: cellID)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "open", style: .plain, target: self, action: #selector(showSpaServiceVC))
         do {
             try self.fetchedhResultController.performFetch()
-            print("COUNT FETCHED FIRST: \(self.fetchedhResultController.sections?[0].numberOfObjects)")
+            print("COUNT FETCH: \(self.fetchedhResultController.sections?[0].numberOfObjects)")
         } catch let error  {
             print("ERROR: \(error)")
         }
@@ -45,6 +47,7 @@ class ReservationsVC: UITableViewController {
         if let reservation = fetchedhResultController.object(at: indexPath) as? Reservation {
             cell.setReservationCellWith(reservation: reservation)
         }
+        cell.delegate = self
         return cell
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,14 +61,39 @@ class ReservationsVC: UITableViewController {
         return Constants.UI.reservatioCellHeight
     }
     
-    // MARK: - Navigation
+    //MARK: - Navigation    
     func showSpaServiceVC() {
         let discountPageVC = DiscountPageController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         let navVC = UINavigationController(rootViewController: discountPageVC)
         self.present(navVC, animated: true)
     }
+    
+    //MARK: - ReservationCellDelegate method
+    func displayAlertToCancel(reservation: Reservation?) {
+        
+        guard let reserve = reservation else {
+            print("NO RESERVATION PASSED")
+            return
+        }
+        
+        let alertController = UIAlertController(title: reserve.serviceName, message: "Are you sure that you want to delete this reservation?", preferredStyle: .alert)
+        let delete = UIAlertAction(title: "DELETE" , style: .default) { (action) in
+            CoreDataStack.sharedInstance.context.delete(reserve)
+            CoreDataStack.sharedInstance.saveContext()
+        }
+        let cancel = UIAlertAction(title: "CANCEL", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(delete)
+        alertController.addAction(cancel)
+        
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
 
-    // MARK: - Memory Warning
+    //MARK: - Memory Warning
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -73,7 +101,6 @@ class ReservationsVC: UITableViewController {
 }
 
 @available(iOS 10.0, *)
-
 extension ReservationsVC: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {

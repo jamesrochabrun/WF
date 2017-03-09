@@ -13,6 +13,7 @@ struct Constants {
     
     struct UI {
         
+    //MARK: general Layout
         static let statusBarHeight: CGFloat = 20
         static let navigationControllerHeight: CGFloat = 44
         static let actionButtonHeight: CGFloat = 44.0
@@ -20,22 +21,23 @@ struct Constants {
         static let actionButtonFontSize: CGFloat = 17.5
         static let actionButtonCornerRadius: CGFloat = 4.0
         static let containerCornerRadius: CGFloat = 10.0
-   
+        static let pageControlHeight: CGFloat = 34.0
+        static let pageControlWidth: CGFloat = 34.0
+        static let selectorViewHeight: CGFloat = 250.0
+        static let bottomPadding: CGFloat = 20.0
+        
+   //MARK: Cells layout
         static let scheduleHeaderHeight = (UIScreen.main.bounds.height - 64) * 0.35
         static let calendarCellHeight = (UIScreen.main.bounds.height - 64) * 0.22
         static let timeCellHeight = (UIScreen.main.bounds.height - 64) * 0.31
         static let footerHeight = (UIScreen.main.bounds.height - 64) * 0.1
-        
         static let scheduleViewPadding: CGFloat = 10.0
         static let scheduleViewPaddingSmall: CGFloat = 5.0
         static let scheduleViewPaddingBig: CGFloat = 15.0
-        
         static let calendarLabelHeight: CGFloat = 15
         static let calendarLabelWidth: CGFloat = 120
         static let timeCellWidth: CGFloat = 100.0
-        
         static let reservatioCellHeight: CGFloat = (UIScreen.main.bounds.height - 64) * 0.43
-        
     }
     
     struct  Font {
@@ -57,7 +59,12 @@ struct Constants {
         static let textColorGray2 = "#515E66"
         static let white = "#ffffff"
         static let backColor = "#f5f5f5"
-
+    }
+    
+    struct GeneralSrings {
+        static let reservationVCTitle = "MY RESERVATIONS"
+        static let scheduleVCTitle = "SCHEDULE"
+        static let discoutnVCTitle = "SPA SERVICE"
     }
     
 }

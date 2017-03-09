@@ -157,6 +157,7 @@ extension String {
 //MARK: notification names
 extension Notification.Name {
     static let pickerNotification = Notification.Name("picker")
+    static let buttonEnabledNotification = Notification.Name("buttonInteraction")
 }
 
 

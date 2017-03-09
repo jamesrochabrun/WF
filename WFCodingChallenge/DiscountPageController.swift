@@ -24,6 +24,7 @@ class DiscountPageController: UIPageViewController {
     //MARK: - App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = Constants.GeneralSrings.discoutnVCTitle
         automaticallyAdjustsScrollViewInsets = false
         setUpSubviews()
         self.dataSource = pageDataSource
@@ -37,10 +38,10 @@ class DiscountPageController: UIPageViewController {
     private func setUpSubviews() {
 
         view.addSubview(serviceSelectorView)
-        serviceSelectorView.heightAnchor.constraint(equalToConstant: 250).isActive = true
-        serviceSelectorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-        serviceSelectorView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
-        serviceSelectorView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
+        serviceSelectorView.heightAnchor.constraint(equalToConstant: Constants.UI.selectorViewHeight).isActive = true
+        serviceSelectorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.UI.bottomPadding).isActive = true
+        serviceSelectorView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: Constants.UI.scheduleViewPaddingBig).isActive = true
+        serviceSelectorView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -Constants.UI.scheduleViewPaddingBig).isActive = true
     }
     
     @objc private func dismissView() {

@@ -41,7 +41,7 @@ class DiscountVC: UIViewController {
     
     lazy var reserveButton: UIButton = {
         let button = UIButton()
-        button.with(title: "RESERVE", target: self, selector: #selector(test), cornerRadius: Constants.UI.actionButtonCornerRadius, font: Constants.Font.medium, fontSize: Constants.UI.actionButtonFontSize, color: Constants.Color.doActionColor, titleColor: Constants.Color.white)
+        button.with(title: "RESERVE", target: self, selector: #selector(goToSchedule), cornerRadius: Constants.UI.actionButtonCornerRadius, font: Constants.Font.medium, fontSize: Constants.UI.actionButtonFontSize, color: Constants.Color.doActionColor, titleColor: Constants.Color.white)
         return button
     }()
   
@@ -62,11 +62,11 @@ class DiscountVC: UIViewController {
         imageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
         view.addSubview(pageControl)
-        pageControl.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        pageControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        pageControl.widthAnchor.constraint(equalToConstant: Constants.UI.pageControlWidth).isActive = true
+        pageControl.heightAnchor.constraint(equalToConstant: Constants.UI.pageControlHeight).isActive = true
+        pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(Constants.UI.selectorViewHeight + Constants.UI.bottomPadding)).isActive = true
         pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        pageControl.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
+  
         view.addSubview(reserveButton)
         reserveButton.widthAnchor.constraint(equalToConstant: Constants.UI.actionButtonWidth).isActive = true
         reserveButton.heightAnchor.constraint(equalToConstant: Constants.UI.actionButtonHeight).isActive = true
@@ -74,13 +74,24 @@ class DiscountVC: UIViewController {
                                             constant: 25).isActive = true
         reserveButton.topAnchor.constraint(equalTo: imageView.topAnchor,
                                            constant: view.bounds.height/3.3).isActive = true
+    }
+    
+    
+    func goToSchedule() {
         
+        if pageControl.currentPage != 1 { return }
+        let scheduleVC = ScheduleVC(collectionViewLayout: UICollectionViewFlowLayout())
+        let hotStoneMassage = Service(name: "Hot Stone Massage", typeDescription: "Massage focused on the deepest layer of muscles to target knots and release chronic muscle tension.", price: 120.0)
+        let hotStoneDiscount = Discount(mainImage: #imageLiteral(resourceName: "hotStoneDiscount"), index: 0)
+        hotStoneMassage.discount = hotStoneDiscount
+        scheduleVC.service = hotStoneMassage
+        navigationController?.pushViewController(scheduleVC, animated: true)
     }
-    
-    
-    func test() {
-        print("testes")
-    }
-    
-    
 }
+
+
+
+
+
+
+

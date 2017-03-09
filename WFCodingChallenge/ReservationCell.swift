@@ -9,7 +9,15 @@
 import Foundation
 import UIKit
 
+protocol ReservationCellDelegate: class {
+    func displayAlertToCancel(reservation: Reservation?)
+}
+
+
 class ReserVationCell: BaseTableViewCell {
+    
+    weak var delegate: ReservationCellDelegate?
+    private var reservation: Reservation?
     
     let containerView: UIView = {
         let v = UIView()
@@ -49,7 +57,7 @@ class ReserVationCell: BaseTableViewCell {
     
     let partyLabel: UILabel = {
         let l = UILabel()
-        l.with(text: "PARTY SIZE", font: Constants.Font.regular, fontSize: 15, textColor: Constants.Color.textColorGray2)
+        l.with(text: "PARTY SIZE - ", font: Constants.Font.regular, fontSize: 15, textColor: Constants.Color.textColorGray2)
         return l
     }()
     
@@ -160,6 +168,7 @@ class ReserVationCell: BaseTableViewCell {
     
     func setReservationCellWith(reservation: Reservation) {
         
+        self.reservation = reservation
         serviceNameLabel.text = reservation.serviceName
         periodLabel.text = reservation.servicePeriod
         if let partySize = reservation.partySize {
@@ -177,6 +186,21 @@ class ReserVationCell: BaseTableViewCell {
     }
     
     func cancelReserve() {
+        delegate?.displayAlertToCancel(reservation: self.reservation)
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
