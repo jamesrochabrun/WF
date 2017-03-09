@@ -23,7 +23,9 @@
 		7B70350D1E70CE7D001861B2 /* PartySizeOptionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B70350C1E70CE7D001861B2 /* PartySizeOptionsModel.swift */; };
 		7B70350F1E70CF31001861B2 /* PartyPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B70350E1E70CF31001861B2 /* PartyPickerDataSource.swift */; };
 		7B7035121E70D2E9001861B2 /* ViewPartyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7035111E70D2E9001861B2 /* ViewPartyPicker.swift */; };
-		7B7035141E70D6CE001861B2 /* ScheduleVCDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7035131E70D6CE001861B2 /* ScheduleVCDataSource.swift */; };
+		7B7035171E71468C001861B2 /* Reservation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7035151E71468C001861B2 /* Reservation+CoreDataClass.swift */; };
+		7B7035181E71468C001861B2 /* Reservation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7035161E71468C001861B2 /* Reservation+CoreDataProperties.swift */; };
+		7B70351B1E7170EE001861B2 /* ReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B70351A1E7170EE001861B2 /* ReservationCell.swift */; };
 		7BD512D91E6F1DB6009DAEF8 /* PageControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD512D81E6F1DB6009DAEF8 /* PageControllerDataSource.swift */; };
 		7BD512DB1E6F423A009DAEF8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD512DA1E6F423A009DAEF8 /* BaseView.swift */; };
 		7BD512DD1E6F431F009DAEF8 /* ServiceSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD512DC1E6F431F009DAEF8 /* ServiceSelectorView.swift */; };
@@ -57,7 +59,9 @@
 		7B70350C1E70CE7D001861B2 /* PartySizeOptionsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartySizeOptionsModel.swift; sourceTree = "<group>"; };
 		7B70350E1E70CF31001861B2 /* PartyPickerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyPickerDataSource.swift; sourceTree = "<group>"; };
 		7B7035111E70D2E9001861B2 /* ViewPartyPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPartyPicker.swift; sourceTree = "<group>"; };
-		7B7035131E70D6CE001861B2 /* ScheduleVCDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleVCDataSource.swift; sourceTree = "<group>"; };
+		7B7035151E71468C001861B2 /* Reservation+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservation+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7B7035161E71468C001861B2 /* Reservation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7B70351A1E7170EE001861B2 /* ReservationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationCell.swift; sourceTree = "<group>"; };
 		7BD512D81E6F1DB6009DAEF8 /* PageControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageControllerDataSource.swift; sourceTree = "<group>"; };
 		7BD512DA1E6F423A009DAEF8 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7BD512DC1E6F431F009DAEF8 /* ServiceSelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceSelectorView.swift; sourceTree = "<group>"; };
@@ -102,7 +106,6 @@
 		7B4DA3631E6E029A008CFF8A /* WFCodingChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				7B4DA37C1E6E0632008CFF8A /* CoreDataStack.swift */,
 				7B4DA3641E6E029A008CFF8A /* AppDelegate.swift */,
 				7B7035021E70996C001861B2 /* Helpers */,
 				7B4DA3791E6E05BA008CFF8A /* Model */,
@@ -120,6 +123,7 @@
 		7B4DA3791E6E05BA008CFF8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7B7035191E71469E001861B2 /* CoreData */,
 				7BD512E21E6F5AE0009DAEF8 /* Service.swift */,
 				7B7035081E70AD1B001861B2 /* BusinessHours.swift */,
 				7B70350C1E70CE7D001861B2 /* PartySizeOptionsModel.swift */,
@@ -177,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				7BD512E01E6F5705009DAEF8 /* ServiceSelectorCell.swift */,
+				7B70351A1E7170EE001861B2 /* ReservationCell.swift */,
 			);
 			name = ReservationsVCCells;
 			sourceTree = "<group>";
@@ -184,8 +189,8 @@
 		7B7035041E709FAF001861B2 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				7B7035011E709872001861B2 /* BaseView */,
 				7B7035101E70D2C1001861B2 /* ScheduleVCViews */,
+				7B7035011E709872001861B2 /* BaseView */,
 				7B7035051E709FC2001861B2 /* ReservationsVCViews */,
 			);
 			name = CustomViews;
@@ -207,6 +212,16 @@
 			name = ScheduleVCViews;
 			sourceTree = "<group>";
 		};
+		7B7035191E71469E001861B2 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7B4DA37C1E6E0632008CFF8A /* CoreDataStack.swift */,
+				7B7035151E71468C001861B2 /* Reservation+CoreDataClass.swift */,
+				7B7035161E71468C001861B2 /* Reservation+CoreDataProperties.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		7BD512E41E6F5E91009DAEF8 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,7 +240,6 @@
 				7B7035061E70A094001861B2 /* CalendarDataSource.swift */,
 				7B70350A1E70AF09001861B2 /* TimeDataSource.swift */,
 				7B70350E1E70CF31001861B2 /* PartyPickerDataSource.swift */,
-				7B7035131E70D6CE001861B2 /* ScheduleVCDataSource.swift */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -314,11 +328,13 @@
 			files = (
 				7B4DA37F1E6E1052008CFF8A /* Constants.swift in Sources */,
 				7BD512EF1E6F870A009DAEF8 /* ScheduleHeaderCell.swift in Sources */,
+				7B7035171E71468C001861B2 /* Reservation+CoreDataClass.swift in Sources */,
 				7BD512EA1E6F7506009DAEF8 /* ScheduleVC.swift in Sources */,
 				7B4DA3811E6E10E8008CFF8A /* Extensions.swift in Sources */,
 				7BD512ED1E6F86B5009DAEF8 /* BaseCollectionViewCelll.swift in Sources */,
 				7BD512E11E6F5705009DAEF8 /* ServiceSelectorCell.swift in Sources */,
 				7B4DA3891E6E2391008CFF8A /* DiscountVC.swift in Sources */,
+				7B70351B1E7170EE001861B2 /* ReservationCell.swift in Sources */,
 				7B4DA3671E6E029A008CFF8A /* ReservationsVC.swift in Sources */,
 				7BD512F31E6F901A009DAEF8 /* TimeCell.swift in Sources */,
 				7BD512E31E6F5AE0009DAEF8 /* Service.swift in Sources */,
@@ -326,12 +342,12 @@
 				7BD512F11E6F8940009DAEF8 /* CalendarCell.swift in Sources */,
 				7BD512D91E6F1DB6009DAEF8 /* PageControllerDataSource.swift in Sources */,
 				7B7035091E70AD1B001861B2 /* BusinessHours.swift in Sources */,
-				7B7035141E70D6CE001861B2 /* ScheduleVCDataSource.swift in Sources */,
 				7B70350D1E70CE7D001861B2 /* PartySizeOptionsModel.swift in Sources */,
 				7B4DA3651E6E029A008CFF8A /* AppDelegate.swift in Sources */,
 				7B70350F1E70CF31001861B2 /* PartyPickerDataSource.swift in Sources */,
 				7B4DA36D1E6E029A008CFF8A /* WFCodingChallenge.xcdatamodeld in Sources */,
 				7BD512DD1E6F431F009DAEF8 /* ServiceSelectorView.swift in Sources */,
+				7B7035181E71468C001861B2 /* Reservation+CoreDataProperties.swift in Sources */,
 				7B4DA3851E6E1997008CFF8A /* DiscountPageController.swift in Sources */,
 				7B70350B1E70AF09001861B2 /* TimeDataSource.swift in Sources */,
 				7B7035121E70D2E9001861B2 /* ViewPartyPicker.swift in Sources */,

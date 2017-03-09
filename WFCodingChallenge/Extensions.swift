@@ -114,6 +114,44 @@ extension Date {
                                  inSameDayAs: normalizedEndDate)
         return dates
     }
+    
+    func getCurrentYear() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY"
+        return dateFormatter.string(from: self)
+    }
+    
+    func getMonth() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"
+        return dateFormatter.string(from: self)
+    }
+}
+
+//MARK: Extensions String
+
+extension String {
+    
+    func convertInFullDayString() -> String {
+        switch self {
+        case "Mon":
+            return "Monday"
+        case "Tue":
+            return "Tuesday"
+        case "Wed":
+            return "Wednesday"
+        case "Thu":
+            return "Thursday"
+        case "Fri":
+            return "Friday"
+        case "Sat":
+            return "Saturday"
+        case "Sun":
+            return "Sunday"
+        default:
+            return self
+        }
+    }
 }
 
 //MARK: notification names

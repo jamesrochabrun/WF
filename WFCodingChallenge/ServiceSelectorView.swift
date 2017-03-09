@@ -30,6 +30,7 @@ class ServiceSelectorView: BaseView {
         tv.delegate = self
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.alwaysBounceVertical = false
+        tv.separatorStyle = .none
         return tv
     }()
     

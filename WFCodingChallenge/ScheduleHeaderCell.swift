@@ -149,7 +149,7 @@ class ScheduleHeaderCell: BaseCollectionViewCell {
         
         serviceImageview.image = service.discount?.mainImage
         serviceLabel.text = service.name
-        timeLabel.text = "1H"
+        timeLabel.text = service.period
         priceLabel.text = "$120.00"
         typeDescriptionLabel.text = service.typeDescription
         partyLabel.text = "PARTY SIZE"

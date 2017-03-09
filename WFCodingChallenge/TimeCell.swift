@@ -10,11 +10,23 @@ import Foundation
 import  UIKit
 
 
+protocol TimeCellDelegate: class {
+    func timeSelectedIs(_ time: String)
+}
+
 class TimeCell: CalendarCell {
     
     //MARK: - private constants
     private let cellID = "cellID"
     private let timeDataSource = TimeDataSource()
+    
+    //MARK: - delegate var
+    weak var timedelegate: TimeCellDelegate?
+    override weak var delegate: CalendarCellDelegate? {
+        didSet {
+            timedelegate = delegate as? TimeCellDelegate
+        }
+    }
     
     //MARK: - set Up UI for TimeCell
     override func setupViews() {
@@ -50,6 +62,9 @@ class TimeCell: CalendarCell {
         guard let cell = collectionView.cellForItem(at: indexPath) as? HourCell else {
             return
         }
+        if let hourString = cell.hourLabel.text {
+            timedelegate?.timeSelectedIs(hourString)
+        }
         UIView.animate(withDuration: 0.3, animations: {
             cell.checkImageView.alpha = 0.75
         })
@@ -70,7 +85,7 @@ class HourCell: BaseCollectionViewCell {
     //MARK: - UI Components
     let hourLabel: UILabel = {
         let label = UILabel()
-        label.with(text: "12: 00PM", font: Constants.Font.regular, fontSize: 11, textColor: Constants.Color.textColorGray1)
+        label.with(text: "", font: Constants.Font.regular, fontSize: 11, textColor: Constants.Color.textColorGray1)
         label.textAlignment = .center
         return label
     }()

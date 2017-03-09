@@ -15,6 +15,7 @@ class Service: NSObject {
     let typeDescription: String
     let price: CGFloat
     var discount: Discount?
+    let period: String = "1H"
     
     init(name: String, typeDescription: String, price: CGFloat) {
         self.name = name

@@ -32,8 +32,9 @@ struct Constants {
         
         static let calendarLabelHeight: CGFloat = 15
         static let calendarLabelWidth: CGFloat = 120
-        
         static let timeCellWidth: CGFloat = 100.0
+        
+        static let reservatioCellHeight: CGFloat = (UIScreen.main.bounds.height - 64) * 0.43
         
     }
     
@@ -43,7 +44,7 @@ struct Constants {
         static let thin = "HelveticaNeue-Thin"
         static let light = "HelveticaNeue-Light"
     }
-    
+
     struct Color {
         static let lightBlue = "#61b3eb"
         static let dotGray = "d0d7e0"
@@ -53,6 +54,7 @@ struct Constants {
         static let textcolorDark1 = "#44464A"
         static let textColorGray = "#7d7d7d"
         static let textColorGray1 = "#53585f"
+        static let textColorGray2 = "#515E66"
         static let white = "#ffffff"
         static let backColor = "#f5f5f5"
 

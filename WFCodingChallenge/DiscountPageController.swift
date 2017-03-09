@@ -14,7 +14,7 @@ class DiscountPageController: UIPageViewController {
     // MARK: - Global Private constants and Variables.
     private let pageDataSource = PageControllerDataSource()
     
-    // MARK: - UI Components
+    // MARK: - UI
     lazy var serviceSelectorView: ServiceSelectorView = {
         let view = ServiceSelectorView()
         view.delegate = self
@@ -30,6 +30,7 @@ class DiscountPageController: UIPageViewController {
         if let startVC = pageDataSource.pageViewController(atIndex: 0) {
             setViewControllers([startVC], direction: .forward, animated: true, completion: nil)
         }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(dismissView))
     }
     
     //MARK: - Set up SubViews
@@ -40,7 +41,10 @@ class DiscountPageController: UIPageViewController {
         serviceSelectorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
         serviceSelectorView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15).isActive = true
         serviceSelectorView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15).isActive = true
-        
+    }
+    
+    @objc private func dismissView() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
