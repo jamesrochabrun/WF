@@ -26,7 +26,7 @@ class ScheduleVC: UICollectionViewController {
     var partySize: String?
     var hourString: String?
     var partyPickerViewTopAnchor: NSLayoutConstraint?
-
+    let reservationStruct = ReservationState()
 
     //MARK: - UI Components
     let partyPickerView: ViewPartyPicker = {
@@ -72,8 +72,11 @@ class ScheduleVC: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.changePartySize(_:)),
                                                name: NSNotification.Name.pickerNotification,
                                                object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.changeButtonInteraction(_:)),
-                                               name: NSNotification.Name.buttonEnabledNotification,
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dateFrom(_:)),
+                                               name: NSNotification.Name.dateSelected,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.timeFrom(_:)),
+                                               name: NSNotification.Name.timeSelected,
                                                object: nil)
     }
     
@@ -105,23 +108,48 @@ class ScheduleVC: UICollectionViewController {
         calendarView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
     
-    //MARK: - Handle reservation Button
-    func changeButtonInteraction(_ notification: NSNotification) {
+    //MARK: - Handle reservation Notifications and Button interaction
+    func dateFrom(_ notification: NSNotification) {
         
-        if let hour = notification.object as? String {
-            hourString = hour
-        }
         if let dict = notification.object as? [String: String] {
             let day = dict["day"]
             weekDayString = day?.convertInFullDayString()
             numberDayString = dict["numberDate"]
+        } else {
+            weekDayString = nil
+            numberDayString = nil
         }
+        changeButtonState()
+        print(weekDayString, numberDayString)
+    }
+    
+    func timeFrom(_ notification: NSNotification) {
+        
+        if let hour = notification.object as? String {
+            hourString = hour
+        } else {
+            hourString = nil
+        }
+        changeButtonState()
+        print(hourString)
+    }
+
+    func changeButtonState() {
         
         if hourString != nil &&
         weekDayString != nil &&
             numberDayString != nil {
             reservationButton.alpha = 1
             reservationButton.isUserInteractionEnabled = true
+        }
+        if numberDayString == nil &&
+            weekDayString == nil {
+            reservationButton.alpha = 0.75
+            reservationButton.isUserInteractionEnabled = false
+        }
+        if hourString == nil {
+            reservationButton.alpha = 0.75
+            reservationButton.isUserInteractionEnabled = false
         }
     }
     

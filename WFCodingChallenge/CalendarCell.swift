@@ -18,6 +18,7 @@ class CalendarCell: BaseCollectionViewCell {
     //MARK: - private constant
     fileprivate let cellID = "cellID"
     private let calendarDataSource = CalendarDataSource()
+    fileprivate var isTouched = false
     
     //MARK: Delegate
     weak var delegate: CalendarCellDelegate?
@@ -95,17 +96,25 @@ extension CalendarCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLa
         guard let cell = collectionView.cellForItem(at: indexPath) as? DateCell else {
             return
         }
-        if let numberDate = cell.numberLabel.text, let day = cell.dayLabel.text {
-            let dict = ["numberDate" : numberDate, "day" : day]
-            NotificationCenter.default.post(name: Notification.Name.buttonEnabledNotification, object: dict)
-        }
         UIView.animate(withDuration: 0.3, animations: {
-            cell.checkImageView.alpha = 0.75
+            if !self.isTouched {
+                cell.checkImageView.alpha = 0.75
+                self.isTouched = true
+                if let numberDate = cell.numberLabel.text, let day = cell.dayLabel.text {
+                    let dict = ["numberDate" : numberDate, "day" : day]
+                    NotificationCenter.default.post(name: Notification.Name.dateSelected, object: dict)
+                }
+            } else {
+                NotificationCenter.default.post(name: Notification.Name.dateSelected, object: nil)
+                self.isTouched = false
+                cell.checkImageView.alpha = 0
+            }
         })
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
+        isTouched = false
         guard let cell = collectionView.cellForItem(at: indexPath) as? DateCell else {
             return //the cell is not visible
         }

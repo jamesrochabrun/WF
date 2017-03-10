@@ -36,3 +36,9 @@ struct Discount {
     }
 }
 
+
+struct ReservationState {
+    var weekDay: String?
+    var dayNumber: String?
+    var hour: String?
+}

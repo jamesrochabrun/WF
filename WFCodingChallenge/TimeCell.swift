@@ -15,7 +15,8 @@ class TimeCell: CalendarCell {
     //MARK: - private constants
     private let cellID = "cellID"
     private let timeDataSource = TimeDataSource()
-    
+    fileprivate var isTouched = false
+
     //MARK: - set Up UI for TimeCell
     override func setupViews() {
         
@@ -51,15 +52,23 @@ class TimeCell: CalendarCell {
         guard let cell = collectionView.cellForItem(at: indexPath) as? HourCell else {
             return
         }
-        if let hourString = cell.hourLabel.text {
-            NotificationCenter.default.post(name: Notification.Name.buttonEnabledNotification, object: hourString)
-        }
         UIView.animate(withDuration: 0.3, animations: {
-            cell.checkImageView.alpha = 0.75
+            if !self.isTouched {
+                cell.checkImageView.alpha = 0.75
+                self.isTouched = true
+                if let hourString = cell.hourLabel.text {
+                    NotificationCenter.default.post(name: Notification.Name.timeSelected, object: hourString)
+                }
+            } else {
+                NotificationCenter.default.post(name: Notification.Name.timeSelected, object: nil)
+                self.isTouched = false
+                cell.checkImageView.alpha = 0
+            }
         })
     }
     
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        isTouched = false
         guard let cell = collectionView.cellForItem(at: indexPath) as? HourCell else {
             return //the cell is not visible
         }
