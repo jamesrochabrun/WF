@@ -27,6 +27,7 @@ class DiscountVC: UIViewController {
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
         return iv
     }()
     
@@ -73,7 +74,7 @@ class DiscountVC: UIViewController {
         reserveButton.leftAnchor.constraint(equalTo: view.leftAnchor,
                                             constant: 25).isActive = true
         reserveButton.topAnchor.constraint(equalTo: imageView.topAnchor,
-                                           constant: view.bounds.height/3.3).isActive = true
+                                           constant: view.frame.height/3.3).isActive = true
     }
     
     //MARK: Navigation

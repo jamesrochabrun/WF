@@ -63,6 +63,7 @@ class ScheduleVC: UICollectionViewController {
         collectionView?.register(TimeCell.self, forCellWithReuseIdentifier: timeCellID)
         collectionView?.backgroundColor = UIColor.hexStringToUIColor(Constants.Color.backColor)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Show Photos", style: .plain, target: self, action: #selector(showPhotosVC))
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: Constants.UI.footerHeight, right: 0)
         setUpViews()
     }
     
@@ -214,7 +215,11 @@ extension ScheduleVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width - 20, height: Constants.UI.scheduleHeaderHeight)
-    }    
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView?.collectionViewLayout.invalidateLayout()
+    }
 }
 
     //MARK: - ScheduleHeaderCellDelegate methods

@@ -38,12 +38,14 @@ class TimeCell: CalendarCell {
         monthLabel.heightAnchor.constraint(equalToConstant: Constants.UI.calendarLabelHeight).isActive = true
     }
     
+    //MARK: Layout of collectionView
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //number of rows are based on the design, 7 is to give some space the collectionView
         let numberOfRows: CGFloat = 3
         return CGSize(width: Constants.UI.timeCellWidth, height: collectionView.frame.height / numberOfRows - 7)
     }
     
+    //MARK: Delegate Methods of collectionView
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? HourCell else {
@@ -65,10 +67,6 @@ class TimeCell: CalendarCell {
             cell.checkImageView.alpha = 0
         })
     }
-    
-    
-    //MARK: Delegate Method
-    
 }
 
 class HourCell: BaseCollectionViewCell {
