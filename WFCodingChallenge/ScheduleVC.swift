@@ -120,7 +120,6 @@ class ScheduleVC: UICollectionViewController {
             numberDayString = nil
         }
         changeButtonState()
-        print(weekDayString, numberDayString)
     }
     
     func timeFrom(_ notification: NSNotification) {
@@ -131,7 +130,6 @@ class ScheduleVC: UICollectionViewController {
             hourString = nil
         }
         changeButtonState()
-        print(hourString)
     }
 
     func changeButtonState() {
