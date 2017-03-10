@@ -62,13 +62,18 @@ class ScheduleVC: UICollectionViewController {
         collectionView?.register(CalendarCell.self, forCellWithReuseIdentifier: calendarCellID)
         collectionView?.register(TimeCell.self, forCellWithReuseIdentifier: timeCellID)
         collectionView?.backgroundColor = UIColor.hexStringToUIColor(Constants.Color.backColor)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Show Photos", style: .plain, target: self, action: #selector(showPhotosVC))
+        setUpViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changePartySize(_:)),
                                                name: NSNotification.Name.pickerNotification,
                                                object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeButtonInteraction(_:)),
                                                name: NSNotification.Name.buttonEnabledNotification,
                                                object: nil)
-        setUpViews()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -117,6 +122,16 @@ class ScheduleVC: UICollectionViewController {
             reservationButton.alpha = 1
             reservationButton.isUserInteractionEnabled = true
         }
+    }
+    
+    //MARK: Navigation
+    func showPhotosVC() {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let photoVC  = PhotosVC(collectionViewLayout: layout)
+        let navVC = UINavigationController(rootViewController: photoVC)
+        self.present(navVC, animated: true)
     }
 }
 
@@ -198,7 +213,7 @@ extension ScheduleVC: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: Constants.UI.scheduleHeaderHeight)
+        return CGSize(width: view.frame.width - 20, height: Constants.UI.scheduleHeaderHeight)
     }    
 }
 

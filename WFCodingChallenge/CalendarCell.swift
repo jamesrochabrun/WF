@@ -43,7 +43,7 @@ class CalendarCell: BaseCollectionViewCell {
         return label
     }()
     
-    lazy var viewCalendarLabel: UIButton = {
+    lazy var viewCalendarButton: UIButton = {
         let b = UIButton()
         b.with(title: "View Calendar", target: self, selector: #selector(showCalendar), cornerRadius: 0, font: Constants.Font.medium, fontSize: 12, color: Constants.Color.backColor, titleColor: Constants.Color.doActionColor)
         return b
@@ -67,10 +67,10 @@ class CalendarCell: BaseCollectionViewCell {
         monthLabel.widthAnchor.constraint(equalToConstant: Constants.UI.calendarLabelWidth).isActive = true
         monthLabel.heightAnchor.constraint(equalToConstant: Constants.UI.calendarLabelHeight).isActive = true
         
-        addSubview(viewCalendarLabel)
-        viewCalendarLabel.bottomAnchor.constraint(equalTo: monthLabel.bottomAnchor).isActive = true
-        viewCalendarLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.UI.scheduleViewPadding).isActive = true
-        viewCalendarLabel.heightAnchor.constraint(equalToConstant: Constants.UI.calendarLabelHeight).isActive = true
+        addSubview(viewCalendarButton)
+        viewCalendarButton.bottomAnchor.constraint(equalTo: monthLabel.bottomAnchor).isActive = true
+        viewCalendarButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -Constants.UI.scheduleViewPadding).isActive = true
+        viewCalendarButton.heightAnchor.constraint(equalToConstant: Constants.UI.calendarLabelHeight).isActive = true
     }
 }
 

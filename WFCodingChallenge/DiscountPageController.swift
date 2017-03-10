@@ -25,9 +25,10 @@ class DiscountPageController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Constants.GeneralSrings.discoutnVCTitle
+        self.dataSource = pageDataSource
+        view.backgroundColor = UIColor.hexStringToUIColor(Constants.Color.backColor)
         automaticallyAdjustsScrollViewInsets = false
         setUpSubviews()
-        self.dataSource = pageDataSource
         if let startVC = pageDataSource.pageViewController(atIndex: 0) {
             setViewControllers([startVC], direction: .forward, animated: true, completion: nil)
         }

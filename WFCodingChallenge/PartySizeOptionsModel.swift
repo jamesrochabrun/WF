@@ -14,7 +14,7 @@ class PartySizeOptionsModel: NSObject {
     //MARK: - Global Private variable
     private var pickerData: [String] = [String]()
     
-    //MARK: - custom Initilizer
+    //MARK: - designated Initilizer
     override init() {
         super.init()
         setPickerData()

@@ -27,6 +27,11 @@
 		7B7035181E71468C001861B2 /* Reservation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7035161E71468C001861B2 /* Reservation+CoreDataProperties.swift */; };
 		7B70351B1E7170EE001861B2 /* ReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B70351A1E7170EE001861B2 /* ReservationCell.swift */; };
 		7BB72D6C1E71F8F3000469DE /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB72D6B1E71F8F3000469DE /* CalendarView.swift */; };
+		7BB72D6E1E721844000469DE /* PhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB72D6D1E721844000469DE /* PhotosVC.swift */; };
+		7BB72D711E721894000469DE /* ServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB72D701E721894000469DE /* ServiceAPI.swift */; };
+		7BB72D741E721904000469DE /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB72D731E721904000469DE /* PhotoCell.swift */; };
+		7BB72D761E721AAD000469DE /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB72D751E721AAD000469DE /* Photo.swift */; };
+		7BB72D781E721B9A000469DE /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB72D771E721B9A000469DE /* PhotoDataSource.swift */; };
 		7BD512D91E6F1DB6009DAEF8 /* PageControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD512D81E6F1DB6009DAEF8 /* PageControllerDataSource.swift */; };
 		7BD512DB1E6F423A009DAEF8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD512DA1E6F423A009DAEF8 /* BaseView.swift */; };
 		7BD512DD1E6F431F009DAEF8 /* ServiceSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD512DC1E6F431F009DAEF8 /* ServiceSelectorView.swift */; };
@@ -64,6 +69,11 @@
 		7B7035161E71468C001861B2 /* Reservation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reservation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7B70351A1E7170EE001861B2 /* ReservationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationCell.swift; sourceTree = "<group>"; };
 		7BB72D6B1E71F8F3000469DE /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		7BB72D6D1E721844000469DE /* PhotosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosVC.swift; sourceTree = "<group>"; };
+		7BB72D701E721894000469DE /* ServiceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAPI.swift; sourceTree = "<group>"; };
+		7BB72D731E721904000469DE /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		7BB72D751E721AAD000469DE /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		7BB72D771E721B9A000469DE /* PhotoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDataSource.swift; sourceTree = "<group>"; };
 		7BD512D81E6F1DB6009DAEF8 /* PageControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageControllerDataSource.swift; sourceTree = "<group>"; };
 		7BD512DA1E6F423A009DAEF8 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7BD512DC1E6F431F009DAEF8 /* ServiceSelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceSelectorView.swift; sourceTree = "<group>"; };
@@ -109,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				7B4DA3641E6E029A008CFF8A /* AppDelegate.swift */,
+				7BB72D6F1E721884000469DE /* Service */,
 				7B7035021E70996C001861B2 /* Helpers */,
 				7B4DA3791E6E05BA008CFF8A /* Model */,
 				7B4DA37A1E6E05C3008CFF8A /* View */,
@@ -127,6 +138,7 @@
 			children = (
 				7B7035191E71469E001861B2 /* CoreData */,
 				7BD512E21E6F5AE0009DAEF8 /* Service.swift */,
+				7BB72D751E721AAD000469DE /* Photo.swift */,
 				7B7035081E70AD1B001861B2 /* BusinessHours.swift */,
 				7B70350C1E70CE7D001861B2 /* PartySizeOptionsModel.swift */,
 				7BD512E71E6F731F009DAEF8 /* DataSources */,
@@ -149,6 +161,7 @@
 				7B4DA3841E6E1997008CFF8A /* DiscountPageController.swift */,
 				7B4DA3881E6E2391008CFF8A /* DiscountVC.swift */,
 				7BD512E91E6F7506009DAEF8 /* ScheduleVC.swift */,
+				7BB72D6D1E721844000469DE /* PhotosVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -225,9 +238,26 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		7BB72D6F1E721884000469DE /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7BB72D701E721894000469DE /* ServiceAPI.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		7BB72D721E7218EA000469DE /* PhotosVCCells */ = {
+			isa = PBXGroup;
+			children = (
+				7BB72D731E721904000469DE /* PhotoCell.swift */,
+			);
+			name = PhotosVCCells;
+			sourceTree = "<group>";
+		};
 		7BD512E41E6F5E91009DAEF8 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				7BB72D721E7218EA000469DE /* PhotosVCCells */,
 				7B7035001E709795001861B2 /* BaseCells */,
 				7B7035031E7099B2001861B2 /* ReservationsVCCells */,
 				7BD512EB1E6F852D009DAEF8 /* SceduleCVCells */,
@@ -243,6 +273,7 @@
 				7B7035061E70A094001861B2 /* CalendarDataSource.swift */,
 				7B70350A1E70AF09001861B2 /* TimeDataSource.swift */,
 				7B70350E1E70CF31001861B2 /* PartyPickerDataSource.swift */,
+				7BB72D771E721B9A000469DE /* PhotoDataSource.swift */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -337,7 +368,10 @@
 				7BD512ED1E6F86B5009DAEF8 /* BaseCollectionViewCelll.swift in Sources */,
 				7BD512E11E6F5705009DAEF8 /* ServiceSelectorCell.swift in Sources */,
 				7B4DA3891E6E2391008CFF8A /* DiscountVC.swift in Sources */,
+				7BB72D781E721B9A000469DE /* PhotoDataSource.swift in Sources */,
+				7BB72D6E1E721844000469DE /* PhotosVC.swift in Sources */,
 				7B70351B1E7170EE001861B2 /* ReservationCell.swift in Sources */,
+				7BB72D761E721AAD000469DE /* Photo.swift in Sources */,
 				7B4DA3671E6E029A008CFF8A /* ReservationsVC.swift in Sources */,
 				7BD512F31E6F901A009DAEF8 /* TimeCell.swift in Sources */,
 				7BD512E31E6F5AE0009DAEF8 /* Service.swift in Sources */,
@@ -350,6 +384,7 @@
 				7B70350F1E70CF31001861B2 /* PartyPickerDataSource.swift in Sources */,
 				7B4DA36D1E6E029A008CFF8A /* WFCodingChallenge.xcdatamodeld in Sources */,
 				7BB72D6C1E71F8F3000469DE /* CalendarView.swift in Sources */,
+				7BB72D711E721894000469DE /* ServiceAPI.swift in Sources */,
 				7BD512DD1E6F431F009DAEF8 /* ServiceSelectorView.swift in Sources */,
 				7B7035181E71468C001861B2 /* Reservation+CoreDataProperties.swift in Sources */,
 				7B4DA3851E6E1997008CFF8A /* DiscountPageController.swift in Sources */,
@@ -358,6 +393,7 @@
 				7B7035071E70A094001861B2 /* CalendarDataSource.swift in Sources */,
 				7BD512DF1E6F5622009DAEF8 /* BaseTableViewCell.swift in Sources */,
 				7BD512E61E6F5F08009DAEF8 /* ServiceDataSource.swift in Sources */,
+				7BB72D741E721904000469DE /* PhotoCell.swift in Sources */,
 				7B4DA37D1E6E0632008CFF8A /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,7 +21,6 @@ class TimeCell: CalendarCell {
         
         addSubview(dateCollectionView)
         addSubview(monthLabel)
-        viewCalendarLabel.isHidden = true
         monthLabel.text = "AVAILABLE TIMES"
         dateCollectionView.register(HourCell.self, forCellWithReuseIdentifier: cellID)
         dateCollectionView.dataSource = timeDataSource
@@ -66,6 +65,10 @@ class TimeCell: CalendarCell {
             cell.checkImageView.alpha = 0
         })
     }
+    
+    
+    //MARK: Delegate Method
+    
 }
 
 class HourCell: BaseCollectionViewCell {

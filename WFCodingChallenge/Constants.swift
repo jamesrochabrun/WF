@@ -67,6 +67,7 @@ struct Constants {
         static let reservationVCTitle = "MY RESERVATIONS"
         static let scheduleVCTitle = "SCHEDULE"
         static let discoutnVCTitle = "SPA SERVICE"
+        static let photosVCTitle = "OUR PHOTOS"
     }
     
 }
