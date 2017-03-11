@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B3D45D01E73BF41004D57FB /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3D45CF1E73BF41004D57FB /* CustomActivityIndicator.swift */; };
 		7B4DA3651E6E029A008CFF8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4DA3641E6E029A008CFF8A /* AppDelegate.swift */; };
 		7B4DA3671E6E029A008CFF8A /* ReservationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4DA3661E6E029A008CFF8A /* ReservationsVC.swift */; };
 		7B4DA36D1E6E029A008CFF8A /* WFCodingChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B4DA36B1E6E029A008CFF8A /* WFCodingChallenge.xcdatamodeld */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B3D45CF1E73BF41004D57FB /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
 		7B4DA3611E6E029A008CFF8A /* WFCodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WFCodingChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B4DA3641E6E029A008CFF8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B4DA3661E6E029A008CFF8A /* ReservationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsVC.swift; sourceTree = "<group>"; };
@@ -99,6 +101,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B3D45CE1E73BF25004D57FB /* PhotoVCViews */ = {
+			isa = PBXGroup;
+			children = (
+				7B3D45CF1E73BF41004D57FB /* CustomActivityIndicator.swift */,
+			);
+			name = PhotoVCViews;
+			sourceTree = "<group>";
+		};
 		7B4DA3581E6E029A008CFF8A = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +214,7 @@
 		7B7035041E709FAF001861B2 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				7B3D45CE1E73BF25004D57FB /* PhotoVCViews */,
 				7B7035101E70D2C1001861B2 /* ScheduleVCViews */,
 				7B7035011E709872001861B2 /* BaseView */,
 				7B7035051E709FC2001861B2 /* ReservationsVCViews */,
@@ -365,6 +376,7 @@
 				7B7035171E71468C001861B2 /* Reservation+CoreDataClass.swift in Sources */,
 				7BD512EA1E6F7506009DAEF8 /* ScheduleVC.swift in Sources */,
 				7B4DA3811E6E10E8008CFF8A /* Extensions.swift in Sources */,
+				7B3D45D01E73BF41004D57FB /* CustomActivityIndicator.swift in Sources */,
 				7BD512ED1E6F86B5009DAEF8 /* BaseCollectionViewCelll.swift in Sources */,
 				7BD512E11E6F5705009DAEF8 /* ServiceSelectorCell.swift in Sources */,
 				7B4DA3891E6E2391008CFF8A /* DiscountVC.swift in Sources */,

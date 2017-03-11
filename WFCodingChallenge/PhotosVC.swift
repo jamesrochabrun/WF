@@ -14,6 +14,12 @@ class PhotosVC: UICollectionViewController {
     //Private constants and data
     private let cellID = "cellID"
     private let photoDataSource = PhotoDataSource()
+    
+    //MARK: - UI Components
+    let customIndicator: CustomActivityIndicator = {
+        let indicator = CustomActivityIndicator()
+        return indicator
+    }()
 
     //MARK: Life cycle app
     override func viewDidLoad() {
@@ -25,6 +31,17 @@ class PhotosVC: UICollectionViewController {
         collectionView?.isPagingEnabled = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(dismissView))
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name.dataNotification, object: nil)
+        setUpViews()
+    }
+    
+    //MARK: SetUp Layout
+    func setUpViews() {
+        
+        view.addSubview(customIndicator)
+        customIndicator.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        customIndicator.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        customIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        customIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -36,6 +53,7 @@ class PhotosVC: UICollectionViewController {
     func reloadTable() {
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
+            self.customIndicator.stopAnimating()
         }
     }
     
@@ -52,11 +70,9 @@ extension PhotosVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: view.frame.width)
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0;
     }
-
 }
 
 

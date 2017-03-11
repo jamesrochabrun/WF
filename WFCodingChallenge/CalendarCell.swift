@@ -98,7 +98,7 @@ extension CalendarCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLa
         }
         UIView.animate(withDuration: 0.3, animations: {
             if !self.isTouched {
-                cell.checkImageView.alpha = 0.75
+                cell.checkImageView.alpha = 0.5
                 self.isTouched = true
                 if let numberDate = cell.numberLabel.text, let day = cell.dayLabel.text {
                     let dict = ["numberDate" : numberDate, "day" : day]

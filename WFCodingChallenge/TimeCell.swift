@@ -54,7 +54,7 @@ class TimeCell: CalendarCell {
         }
         UIView.animate(withDuration: 0.3, animations: {
             if !self.isTouched {
-                cell.checkImageView.alpha = 0.75
+                cell.checkImageView.alpha = 0.5
                 self.isTouched = true
                 if let hourString = cell.hourLabel.text {
                     NotificationCenter.default.post(name: Notification.Name.timeSelected, object: hourString)

@@ -26,7 +26,6 @@ class ScheduleVC: UICollectionViewController {
     var partySize: String?
     var hourString: String?
     var partyPickerViewTopAnchor: NSLayoutConstraint?
-    let reservationStruct = ReservationState()
 
     //MARK: - UI Components
     let partyPickerView: ViewPartyPicker = {
@@ -44,7 +43,7 @@ class ScheduleVC: UICollectionViewController {
         let b = UIButton()
         if #available(iOS 10.0, *) {
             b.with(title: "RESERVE", target: self, selector: #selector(constructAndSaveInCoreData), cornerRadius: 0, font: Constants.Font.medium, fontSize: 16, color: Constants.Color.doActionColor, titleColor: Constants.Color.dotWhite)
-            b.alpha = 0.7
+            b.alpha = 0.5
             b.isUserInteractionEnabled = false
         } else {
             // Fallback on earlier versions
@@ -142,11 +141,11 @@ class ScheduleVC: UICollectionViewController {
         }
         if numberDayString == nil &&
             weekDayString == nil {
-            reservationButton.alpha = 0.75
+            reservationButton.alpha = 0.5
             reservationButton.isUserInteractionEnabled = false
         }
         if hourString == nil {
-            reservationButton.alpha = 0.75
+            reservationButton.alpha = 0.5
             reservationButton.isUserInteractionEnabled = false
         }
     }
